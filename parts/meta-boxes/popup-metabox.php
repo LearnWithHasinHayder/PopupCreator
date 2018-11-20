@@ -4,6 +4,15 @@ Title: Popup Settings
 Post Type: popup
 */
 piklist( 'field', array(
+	'type'  => 'checkbox',
+	'field' => 'popupcreator_active',
+	'label' => __( 'Active', 'popupcreator' ),
+	'value'=>0,
+	'choices'=>array(
+		1=>__( 'Active', 'popupcreator' )
+	)
+) );
+piklist( 'field', array(
 	'type'  => 'text',
 	'field' => 'popupcreator_display_after',
 	'label' => __( 'Display Popup After', 'popupcreator' ),
@@ -39,7 +48,8 @@ piklist( 'field', array(
 	'label'   => __( 'Popup Size', 'popupcreator' ),
 	'value'   => 'landscape',
 	'choices' => array(
-		'landscape' => __( 'Landscape', 'popupcreator' ),
-		'square' => __( 'Square', 'popupcreator' ),
+		'popup-landscape' => __( 'Landscape', 'popupcreator' ),
+		'popup-square' => __( 'Square', 'popupcreator' ),
+		'full' => __( 'Original', 'popupcreator' ),
 	)
 ) );
