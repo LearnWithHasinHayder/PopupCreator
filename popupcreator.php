@@ -75,29 +75,38 @@ class PopupCreator {
 
 	function print_modal_markup() {
 		$arguments = array(
-			'post_type'  => 'popup',
-			'post_status'     => 'publish',
-			'meta_key'   => 'popupcreator_active',
-			'meta_value' => 1
+			'post_type'   => 'popup',
+			'post_status' => 'publish',
+			'meta_key'    => 'popupcreator_active',
+			'meta_value'  => 1
 		);
-		$query = new WP_Query($arguments);
-		while($query->have_posts()){
-		    $query->the_post();
-		    $size = get_post_meta(get_the_ID(),'popupcreator_popup_size',true);
-		    $image = get_the_post_thumbnail_url(get_the_ID(), $size);
-		    ?>
-            <div class="modal-content" data-modal-id="<?php the_ID();?>" data-size="<?php echo $size; ?>">
+		$query     = new WP_Query( $arguments );
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$size  = get_post_meta( get_the_ID(), 'popupcreator_popup_size', true );
+			$exit  = get_post_meta( get_the_ID(), 'popupcreator_on_exit', true );
+			$delay = get_post_meta( get_the_ID(), 'popupcreator_display_after', true );
+			if ( $delay > 0 ) {
+				$delay *= 1000;
+			} else {
+				$delay = 0;
+			}
+			$image = get_the_post_thumbnail_url( get_the_ID(), $size );
+			?>
+            <div class="modal-content" data-modal-id="<?php the_ID(); ?>" data-size="<?php echo esc_attr( $size ); ?>"
+                 data-exit="<?php echo esc_attr( $exit ); ?>" data-delay="<?php echo esc_attr( $delay ); ?>">
                 <div><img class="close-button" width="30"
-                          src="<?php echo plugin_dir_url( __FILE__ ) . "assets/img/x.png"; ?>" alt="<?php _e( 'Close', 'popupcreator' ) ?>">
+                          src="<?php echo plugin_dir_url( __FILE__ ) . "assets/img/x.png"; ?>"
+                          alt="<?php _e( 'Close', 'popupcreator' ) ?>">
                 </div>
-                <img src="<?php echo esc_url($image);?>"
+                <img src="<?php echo esc_url( $image ); ?>"
                      alt="Popup">
 
 
             </div>
-            <?php
-        }
-        wp_reset_query();
+			<?php
+		}
+		wp_reset_query();
 	}
 
 

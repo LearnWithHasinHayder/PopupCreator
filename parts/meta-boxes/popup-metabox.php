@@ -34,12 +34,13 @@ piklist( 'field', array(
 	)
 ) );
 piklist( 'field', array(
-	'type'    => 'checkbox',
+	'type'    => 'radio',
 	'field'   => 'popupcreator_on_exit',
 	'label'   => __( 'Display On Exit', 'popupcreator' ),
 	'value'   => 1,
 	'choices' => array(
-		0 => __( 'Display On Exit', 'popupcreator' )
+		0 => __( 'Display On Exit', 'popupcreator' ),
+		1 => __( 'Display On Page Load', 'popupcreator' )
 	)
 ) );
 piklist( 'field', array(
